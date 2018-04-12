@@ -85,20 +85,15 @@ class MySQLToS3Operator(BaseOperator):
     def get_schema(self, hook, table):
         logging.info('Initiating schema retrieval.')
         results = list(hook.get_schema(table))
-        output_dict = {}
+        output_array = []
         for i in results:
-            new = []
             new_dict = {}
-            for n in i:
-                if n == 'COLUMN_NAME':
-                    new.insert(0, i[n])
-                else:
-                    new.insert(1, i[n])
-            new = [i for i in new if i.islower()]
-            if len(new) == 2:
-                new_dict[new[0]] = new[1]
-                output_dict.update(new_dict)
-        self.s3_upload(str(output_dict), schema=True)
+            new_dict['name']=i['COLUMN_NAME']
+            new_dict['type']=i['COLUMN_TYPE']
+            
+            if len(new_dict) == 2:
+                output_array.append(new_dict)
+        self.s3_upload(json.dumps(output_array), schema=True)
 
     def get_records(self, hook):
         logging.info('Initiating record retrieval.')
