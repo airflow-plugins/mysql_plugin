@@ -5,7 +5,7 @@ class AstroMySqlHook(MySqlHook):
     def get_schema(self, table):
         query = \
             """
-            SELECT COLUMN_NAME, COLUMN_TYPE
+            SELECT lower(COLUMN_NAME) as COLUMN_NAME, COLUMN_TYPE
             FROM INFORMATION_SCHEMA.COLUMNS
             WHERE TABLE_NAME = '{0}';
             """.format(table)
