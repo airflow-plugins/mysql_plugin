@@ -40,7 +40,7 @@ class S3ToMySQLOperator(BaseOperator):
                                     with. Only required if using a load_type of
                                     "upsert".
     :type incremental_key:          string
-    :param load_type:               The method of loading into Redshift that
+    :param load_type:               The method of loading into MySQL that
                                     should occur. Options are "append",
                                     "rebuild", and "upsert". Defaults to
                                     "append."
