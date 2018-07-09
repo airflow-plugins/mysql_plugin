@@ -8,12 +8,12 @@ import logging
 
 class S3ToMySQLOperator(BaseOperator):
     """
-    MySQL to Spreadsheet Operator
 
     NOTE: To avoid invalid characters, it is recommended
     to specify the character encoding (e.g {"charset":"utf8"}).
 
     S3 To MySQL Operator
+    
     :param s3_conn_id:              The source s3 connection id.
     :type s3_conn_id:               string
     :param s3_bucket:               The source s3 bucket.
